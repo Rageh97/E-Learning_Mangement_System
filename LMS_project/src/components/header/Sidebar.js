@@ -8,6 +8,9 @@ function Sidebar() {
         <li>
           <Link to='create-exame'>Create Exame</Link>
         </li>
+        <li>
+          <Link to='add-course'>Add Course</Link>
+        </li>
         
       </ul>
     </aside>

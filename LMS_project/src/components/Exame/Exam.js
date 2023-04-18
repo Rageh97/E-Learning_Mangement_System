@@ -1,195 +1,124 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import { addQuestion, deleteQuestion } from "../../RTK/ExamSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Exam.css";
+const CreateExam = () => {
+  const [questionType, setQuestionType] = useState("text");
+  const [question, setQuestion] = useState("");
+  const [answerOptions, setAnswerOptions] = useState([]);
+  const questions = useSelector((state) => state.questions)
+  const dispatch = useDispatch();
+  const handleAddAnswerOption = () => {
+    setAnswerOptions([...answerOptions, ""]);
+  };
 
-function Exam() {
-  const [questions, setQuestions] = useState([]);
+  const handleAnswerOptionChange = (index, value) => {
+    const newAnswerOptions = [...answerOptions];
+    newAnswerOptions[index] = value;
+    setAnswerOptions(newAnswerOptions);
+  };
 
-  const addQuestion = (type) => {
+  const handleSaveQuestion = () => {
     const newQuestion = {
-      type: type,
-      question: "",
-      options: [
-        { value: "", selected: false },
-        { value: "", selected: false },
-        { value: "", selected: false },
-      ],
-      image: "",
-      answer: "",
+      id: nanoid(),
+      question,
+      questionType,
+      answerOptions: questionType === "checkbox" ? answerOptions : [],
     };
-    setQuestions([...questions, newQuestion]);
-  };
 
-  const handleTextChange = (event, index) => {
-    const newQuestions = [...questions];
-    newQuestions[index].question = event.target.value;
-    setQuestions(newQuestions);
-  };
-
-  const handleOptionChange = (event, questionIndex, optionIndex) => {
-    const newQuestions = [...questions];
-    newQuestions[questionIndex].options[optionIndex].value =
-      event.target.value;
-    setQuestions(newQuestions);
-  };
-
-  const handleCheckboxChange = (event, questionIndex, optionIndex) => {
-    const newQuestions = [...questions];
-    newQuestions[questionIndex].options[optionIndex].selected =
-      event.target.checked;
-    setQuestions(newQuestions);
-  };
-
-  const handleImageChange = (event, index) => {
-    const newQuestions = [...questions];
-    const imageFile = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      newQuestions[index].image = reader.result;
-      setQuestions(newQuestions);
-    };
-    reader.readAsDataURL(imageFile);
-  };
-
-  const updateAnswer = (event, index) => {
-    const newQuestions = [...questions];
-    newQuestions[index].answer = event.target.value;
-    setQuestions(newQuestions);
+    if (question !== "") {
+      dispatch(addQuestion(newQuestion));
+      setQuestion("");
+      setAnswerOptions([]);
+      toast.success("Question saved !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error("Add question !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   return (
-    <div className="container container-exam mb-5 m">
-        <div className="exam">
-      <h1 className="mb-5 mt-3 text-center">Create Exam</h1>
-      <div className="add-question mb-5">
-        <button className="mx-3 add-btn" onClick={() => addQuestion("text")}>Add Text Question</button>
-        <button className="mx-3 add-btn" onClick={() => addQuestion("checkbox")}>
-          Add Checkbox Question
-        </button>
-        <button className="mx-3 add-btn" onClick={() => addQuestion("image")}>Add Image Question</button>
-      </div>
-      <div className="question-list">
-        {questions.map((question, index) => (
-          <div className="question" key={index}>
-            <div className="question-type">{question.type}</div>
-            {question.type === "text" && (
-              <>
-               <div className="Form-question-text d-flex flex-column align-items-center justify-content-center">
-               <div className="mb-4 d-flex flex-column w-100">
-                <label>Question:</label>
-                <input
-                  type="text"
-                  value={question.question}
-                  onChange={(event) => handleTextChange(event, index)}
-                />
-                </div>
-                <div className="d-flex flex-column w-100 mb-4">
-                <label>Answer:</label>
-                <input
-                  type="text"
-                  value={question.answer}
-                  onChange={(event) => updateAnswer(event, index)}
-                />
-                </div>
-               </div>
-              </>
-            )}
-            {question.type === "checkbox" && (
-              <>
-              <div className="Form-question-checkbox d-flex flex-column align-items-center justify-content-center">
-              <div className="mb-4 d-flex flex-column w-100">
-               <label>Question:</label>
-                <input
-                  type="text"
-                  value={question.question}
-                  onChange={(event) => handleTextChange(event, index)}
-                />
-               </div>
-              <div className="mb-4 d-flex flex-column w-100">
-              <label>Options:</label>
-                {question.options.map((option, optionIndex) => (
-
-                      <div key={optionIndex}>
-                    <input
-                    className="me-3"
-                      type="checkbox"
-                      value={option.value}
-                      checked={option.selected}
-                      onChange={(event) =>
-                        handleCheckboxChange(event, index, optionIndex)
-                      }
-                    />
-                    <label>
-                      <input
-                        type="text"
-                        value={option.value}
-                        onChange={(event) =>
-                            handleOptionChange(event, index, optionIndex)
-                          }
-                        />
-                      </label>
-                    </div>
-
-                    ))}
-              </div>
-                    <div className="mb-4 d-flex flex-column w-100">
-                    <label>Answer:</label>
-                    <input
-                      type="text"
-                      value={question.answer}
-                      onChange={(event) => updateAnswer(event, index)}
-                    />
-                    </div>
-              </div>
-                  </>
-                )}
-                {question.type === "image" && (
-                  <>
-                    <div className="Form-question-img d-flex flex-column align-items-center justify-content-center">
-                    <div className="mb-4 d-flex flex-column w-100">
-                    <label>Question:</label>
-                    <input
-                      type="text"
-                      value={question.question}
-                      onChange={(event) => handleTextChange(event, index)}
-                    />
-                    </div>
-                   <div className="mb-4 d-flex flex-column w-100">
-                   <label>Image:</label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(event) => handleImageChange(event, index)}
-                    />
-                   </div>
-                  <div className="mb-4 d-flex flex-column w-100">
-                  <label>Answer:</label>
-                    <input
-                      type="text"
-                      value={question.answer}
-                      onChange={(event) => updateAnswer(event, index)}
-                    />
-                  </div>
-                    </div>
-                  </>
-                )}
-                <button className="delete-btn mb-4" onClick={() => {
-                  const newQuestions = [...questions];
-                  newQuestions.splice(index, 1);
-                  setQuestions(newQuestions);
-                }}>Delete</button>
-              </div>
-            ))}
+    <>
+      <ToastContainer />
+      <h2 className="mb-5 mt-4 text-center">Create Exam</h2>
+      <div className="container container-exam mt-5 p-4 mb-5">
+        <div>
+          <div>
+            <label htmlFor="question-type">Select Type:</label>
+            <select
+              className="input w-100"
+              id="question-type"
+              value={questionType}
+              onChange={(e) => setQuestionType(e.target.value)}
+            >
+              <option value="text">Text</option>
+              <option value="checkbox">Checkbox</option>
+            </select>
           </div>
+          <div>
+            <label htmlFor="question">Question:</label>
+            <textarea
+              className="input w-100"
+              id="question"
+              type="text"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
+          </div>
+          {questionType === "checkbox" && (
+            <div className="d-flex flex-column">
+              <label>Answer Options:</label>
+              {answerOptions.map((option, index) => (
+                <div key={index}>
+                  <input
+                    className="input w-100 mb-2"
+                    type="text"
+                    value={option}
+                    onChange={(e) =>
+                      handleAnswerOptionChange(index, e.target.value)
+                    }
+                  />
+                </div>
+              ))}
+              <button className="add-btn" onClick={handleAddAnswerOption}>
+                Add Answer Option
+              </button>
+            </div>
+          )}
+          <button className="save-btn mt-3" onClick={handleSaveQuestion}>
+            Save Question
+          </button>
+          
         </div>
-        {/* <div>
-            {questions.map((i) => {
-                <h3>{i}</h3>
-            })}
-        </div> */}
-    </div>
-);
-}
+      </div>
 
-export default Exam;
+      <div className="mt-5">
+        {questions?.map((question) => {
+          return (
+            <>
+              <h3>{question.question}</h3>
+              {question?.answerOptions?.map((option, index) => {
+                return (
+                  <>
+                    <div>
+                    <input className="me-2" type="checkbox" />
+                    <label className="" key={index}>{option}</label>
+                    </div>
+                  </>
+                );
+              })}
+            </>
+          );
+        })}
+      </div>
+    </>
+  );
+};
 
-
+export default CreateExam;

@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f3f3f3;
+    background-color: #F5F7FF;
     padding: 10px;
 }
 .add-btn{
@@ -19,7 +19,14 @@
     color: white;
     border: none;
 }
-input{
+.save-btn{
+    padding: 8px;
+    border-radius: 8px;
+    background-color: darkcyan;
+    color: white;
+    border: none;
+}
+.input{
     border: none;
     padding: 8px;
     border-radius: 5px;
