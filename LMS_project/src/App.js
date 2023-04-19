@@ -2,9 +2,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Courses from "./components/AllCourses/index";
-import Exam from "./components/Exame/Exam";
+import AllCourses from "./components/AllCourses/index";
+import CreateExam from "./components/Exame/Exam";
 import AddCourse from "./components/AddCourse/AddCourse";
+import Course from "./components/course/index";
+import Exame from "./components/examPage/index";
 
 
 const App = () => {
@@ -12,9 +14,11 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Courses />} />
-          <Route path="create-exame" element={<Exam />} />
+          <Route index element={<AllCourses />} />
+          <Route path="create-exame" element={<CreateExam />} />
           <Route path="add-course" element={<AddCourse />} />
+          <Route path="course" element={<Course />} />
+          <Route path="exame" element={<Exame />} />
         </Route>
       </Routes>
     </BrowserRouter>
