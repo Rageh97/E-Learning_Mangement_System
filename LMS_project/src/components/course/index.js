@@ -1,7 +1,22 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import axios from "axios";
 import { ButtonGroup,Button } from 'react-bootstrap'
-import {Link}from 'react-router-dom'
+import {Link,useParams}from 'react-router-dom'
 export default function Course() {
+  const { id } = useParams();
+  const[course,setCourse]=useState([]);
+
+  const fetchCourse=async()=>{
+    await axios.get(`http://127.0.0.1:8000/api/courses/${id}`).then(({data})=>{setCourse(data)})
+  }
+  useEffect(()=>{
+    fetchCourse()
+  },[])
+  const courseName=course.map((course,index)=>(
+    <div key={index}>
+      <h2>{course.name}</h2>
+    </div>
+  ))
   return (
     <>
       <section className="bg-light py-5 pt-2 py-xl-8">
@@ -10,7 +25,6 @@ export default function Course() {
             <div className="text-md-start">
               <div className="text-lg-left text-md-center text-sm-center">
                 <h3 className="display-3 fw-bolder">course name</h3>
-
                 <span
                   className="w-25 mx-auto ms-md-0 mb-2 d-inline-block bg-dark"
                   style={{ height: 2 + "px" }}
@@ -29,7 +43,8 @@ export default function Course() {
                 </ButtonGroup>
               </div>
               <div className="row">
-                <div className="col-12 mb-3">
+                {courseName}
+                {/* <div className="col-12 mb-3">
                   <div class="card">
                     <h4 class="card-header">lecture : 1</h4>
                     <div class="card-body">
@@ -159,7 +174,7 @@ export default function Course() {
                     </div>
                   </div>
                 </div>
-                <div className="col-12 mb-3">
+                <div className="col-12 mb-3"> 
                   <div class="card">
                     <h4 class="card-header">lecture : 4</h4>
                     <div class="card-body">
@@ -202,6 +217,7 @@ export default function Course() {
                     </div>
                   </div>
                 </div>
+                */}
               </div>
             </div>
           </div>

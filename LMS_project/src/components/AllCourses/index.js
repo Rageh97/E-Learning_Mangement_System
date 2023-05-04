@@ -1,6 +1,15 @@
-import React from 'react'
+import axios from 'axios';
+import React,{useState,useEffect} from 'react'
 import { Fragment } from 'react'
 const Courses = () => {
+  const[courses,setCourse]=useState([]);
+
+  const fetchCourse=async()=>{
+    await axios.get('http://127.0.0.1:8000/api/courses').then(({data})=>{setCourse(data)})
+  }
+  useEffect(()=>{
+    fetchCourse()
+  },[])
   return (
     <Fragment>
         <section className='bg-light py-5 py-xl-8'>
@@ -21,138 +30,32 @@ const Courses = () => {
                     ></span>
                   </div>
                   <div className="row">
-                    <div className="col-sm-12 pb-3 col-md-6 col-lg-4">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src="image/hero5.jpg"
-                          alt="Card image cap"
-                        />
-                        <div className="card-body">
-                          <h5 className="card-title">software engineering</h5>
-                          <p className="card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Labore, dolore voluptatum! Sunt error dicta
-                            quidem!
-                          </p>
-                          <a
-                            href="pages/course/course.html"
-                            className="btn btn-primary"
-                            >details
-                            </a>
+                    {
+                      courses.length>0 &&courses.map((course,index)=>(
+                            <div className="col-sm-12 pb-3 col-md-6 col-lg-4" key={index}>
+                          <div className="card">
+                            <img
+                              className="card-img-top"
+                              src="image/hero5.jpg"
+                              alt="Card image cap"
+                            />
+                            <div className="card-body">
+                              <h5 className="card-title">{course.name}</h5>
+                              <p className="card-text">
+                              {course.description}
+                              </p>
+                              <a
+                                href="pages/course/course.html"
+                                className="btn btn-primary"
+                                >details
+                                </a>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 pb-3 col-md-6 col-lg-4">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src="image/hero5.jpg"
-                          alt="Card image cap"
-                        />
-                        <div className="card-body">
-                          <h5 className="card-title">software engineering</h5>
-                          <p className="card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Labore, dolore voluptatum! Sunt error dicta
-                            quidem!
-                          </p>
-                          <a
-                            href="pages/course/course.html"
-                            className="btn btn-primary"
-                            >details
-                            </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 pb-3 col-md-6 col-lg-4">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src="image/hero5.jpg"
-                          alt="Card image cap"
-                        />
-                        <div className="card-body">
-                          <h5 className="card-title">software engineering</h5>
-                          <p className="card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Labore, dolore voluptatum! Sunt error dicta
-                            quidem!
-                          </p>
-                          <a
-                            href="pages/course/course.html"
-                            className="btn btn-primary"
-                            >details</a>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 pb-3 col-md-6 col-lg-4">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src="image/hero5.jpg"
-                          alt="Card image cap"
-                        />
-                        <div className="card-body">
-                          <h5 className="card-title">software engineering</h5>
-                          <p className="card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Labore, dolore voluptatum! Sunt error dicta
-                            quidem!
-                          </p>
-                          <a
-                            href="pages/course/course.html"
-                            className="btn btn-primary"
-                            >details</a>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 pb-3 col-md-6 col-lg-4">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src="image/hero5.jpg"
-                          alt="Card image cap"
-                        />
-                        <div className="card-body">
-                          <h5 className="card-title">software engineering</h5>
-                          <p className="card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Labore, dolore voluptatum! Sunt error dicta
-                            quidem!
-                          </p>
-                          <a
-                            href="pages/course/course.html"
-                            className="btn btn-primary"
-                            >details</a>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 pb-3 col-md-6 col-lg-4">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src="image/hero5.jpg"
-                          alt="Card image cap"
-                        />
-                        <div className="card-body">
-                          <h5 className="card-title">software engineering</h5>
-                          <p className="card-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Labore, dolore voluptatum! Sunt error dicta
-                            quidem!
-                          </p>
-                          <a
-                            href="pages/course/course.html"
-                            className="btn btn-primary"
-                            >details</a>
-                          
-                        </div>
-                      </div>
-                    </div>
+                      ))  
+                    }
+                  
+                  
                   </div>
                 </div>
               </div>
