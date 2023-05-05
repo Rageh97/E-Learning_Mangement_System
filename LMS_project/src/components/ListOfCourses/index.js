@@ -8,8 +8,9 @@ export default function Index() {
   const [courses, setCourse] = useState([]);
 
   const fetchCourse = async () => {
-    await axios.get("http//127.0.0.1:8000/api/courses").then(({ data }) => {
-      setCourse(data);
+    await axios.get("http://127.0.0.1:8000/api/courses").then(({ data }) => {
+      console.log(data);
+      setCourse(data.data);
     });
   };
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function Index() {
 
   const deleteCourse = async (id) => {
     await axios
-      .delete("http//127.0.0.1:8000/api/courses/" + id)
+      .delete("http://127.0.0.1:8000/api/courses/" + id)
       .then(({ data }) => {
         alert(data.message);
         fetchCourse();
@@ -36,11 +37,12 @@ export default function Index() {
       <td>
         <ButtonGroup aria-label="Basic example">
           <Button variant="success">
-            <Link to="course/edit">Edit</Link>
+            <Link to={`/course/edit/${course.id}`}
+            style={{color:"#fff"}}>Edit</Link>
           </Button>
           <Button
             variant="danger"
-            onClick={() => {deleteCourse()}}>
+            onClick={() => deleteCourse(course.id)}>
             Delete
           </Button>
         </ButtonGroup>

@@ -6,11 +6,15 @@ function Sidebar() {
     <aside className="sidebar">
       <ul className="sidebar-menu">
         <li>
-          <Link to='create-exame'>Create Exame</Link>
+          <Link to='create-exam'>Create Exame</Link>
         </li>
         <li>
           <Link to='add-course'>Add Course</Link>
         </li>
+        <li>
+          <Link to='course/list'>List of Course</Link>
+        </li>
+      
         
       </ul>
     </aside>

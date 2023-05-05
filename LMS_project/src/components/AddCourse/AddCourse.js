@@ -10,7 +10,7 @@ function AddCourse() {
   const [code,setCode] = useState('')
   const [description, setDescription] = useState('')
   const [level,setLevel] = useState('')
-  const [semester,setSemester] = useState('')
+  const [semester_number,setSemester] = useState('')
   const [image, setImage] = useState('')
 
   const changeHandler = (e)=>{
@@ -18,10 +18,11 @@ function AddCourse() {
     
   }
 
-  const createCourse = async(e)=>{
+  const createProduct = async(e)=>{
       e.preventDefault();
       const formData = new FormData();
       formData.append('name', name)
+      formData.append('semester_number', semester_number)
       formData.append('code', code)
       formData.append('description', description)
       formData.append('study_level', level)
@@ -42,10 +43,10 @@ function AddCourse() {
   }
   return (
     <>
-      <form className="w-75 m-auto py-2" onSubmit={createCourse}>
+      <form className="w-75 m-auto py-2" onSubmit={createProduct}>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label>name</label>
+            <label for="inputEmail4">name</label>
             <input
               type="text"
               className="form-control"
@@ -55,7 +56,7 @@ function AddCourse() {
             />
           </div>
           <div className="form-group col-md-6">
-            <label>code</label>
+            <label for="inputPassword4">code</label>
             <input
               type="text"
               className="form-control"
@@ -67,7 +68,7 @@ function AddCourse() {
           </div>
         </div>
         <div className="form-group">
-          <label>description</label>
+          <label for="inputAddress">discription</label>
           <textarea className="form-control" placeholder="discription"
             value={description}
             onChange={(e)=>{setDescription(e.target.value)}}
@@ -79,28 +80,30 @@ function AddCourse() {
       
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label >image</label>
+            <label for="inputCity">image</label>
             <input type="file" className="form-control"onChange={changeHandler} />
           </div>
           <div className="form-group col-md-4">
-            <label>study_level</label>
+            <label for="inputState">study_level</label>
             <select id="inputState" className="form-control"
               value={level}
               onChange={(e)=>{setLevel(e.target.value)}}
-              >
-              <option selected>1</option>
+              > 
+              <option>choose...</option>
+              <option>1</option>
               <option>2</option>
               <option>3</option>
               <option>4</option>
             </select>
           </div>
           <div classNameName="form-group col-md-2">
-          <label >semester</label>
+          <label for="inputState">semester</label>
             <select id="inputState" className="form-control"
-              value={semester}
+              value={semester_number}
               onChange={(e)=>{setSemester(e.target.value)}}
             >
-              <option selected>1</option>
+              <option>choose...</option>
+              <option>1</option>
               <option>2</option>
               
               </select>

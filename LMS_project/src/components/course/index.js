@@ -1,50 +1,58 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ButtonGroup,Button } from 'react-bootstrap'
-import {Link,useParams}from 'react-router-dom'
+import { ButtonGroup, Button } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 export default function Course() {
   const { id } = useParams();
-  const[course,setCourse]=useState([]);
 
-  const fetchCourse=async()=>{
-    await axios.get(`http://127.0.0.1:8000/api/courses/${id}`).then(({data})=>{setCourse(data)})
-  }
-  useEffect(()=>{
-    fetchCourse()
-  },[])
-  const courseName=course.map((course,index)=>(
-    <div key={index}>
-      <h2>{course.name}</h2>
-    </div>
-  ))
+  const [courseName, setName] = useState("");
+
+  const fetchCourse = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/courses/${id}`)
+      .then(({ data }) => {
+        const courseItem = data.data;
+        setName(courseItem.name);
+        
+      });
+  };
+
+
+  useEffect(() => {
+    fetchCourse();
+  }, []);
+
   return (
-    <>
-      <section className="bg-light py-5 pt-2 py-xl-8">
-        <div className="container overflow-hidden  ">
-          <div className="gy-md-0">
-            <div className="text-md-start">
-              <div className="text-lg-left text-md-center text-sm-center">
-                <h3 className="display-3 fw-bolder">course name</h3>
-                <span
-                  className="w-25 mx-auto ms-md-0 mb-2 d-inline-block bg-dark"
-                  style={{ height: 2 + "px" }}
-                ></span>
-                <br />
-                <span
-                  className="mx-auto w-50 ms-md-0 mb-4 d-inline-block bg-dark"
-                  style={{ height: 2 + "px" }}
-                ></span>
-              </div>
-              <div className="mb-3"> 
-                <ButtonGroup>
-                  <Button variant="success"> Add content</Button>
-                  <Button variant="secondary"> Add Assginment</Button>
-                  <Button><Link to="/create-exame" style={{color:'#fff'}}>Add Exame</Link></Button>
-                </ButtonGroup>
-              </div>
-              <div className="row">
-                {courseName}
-                {/* <div className="col-12 mb-3">
+    <section className="bg-light py-5 pt-2 py-xl-8">
+      <div className="container overflow-hidden  ">
+        <div className="gy-md-0">
+          <div className="text-md-start">
+            <div className="text-lg-left text-md-center text-sm-center">
+              <h3 className="display-3 fw-bolder">{courseName}</h3>
+              <span
+                className="w-25 mx-auto ms-md-0 mb-2 d-inline-block bg-dark"
+                style={{ height: 2 + "px" }}
+              ></span>
+              <br />
+              <span
+                className="mx-auto w-50 ms-md-0 mb-4 d-inline-block bg-dark"
+                style={{ height: 2 + "px" }}
+              ></span>
+            </div>
+            <div className="mb-3">
+              <ButtonGroup>
+                <Button variant="success"> Add content</Button>
+                <Button variant="secondary"> Add Assginment</Button>
+                <Button>
+                  <Link to="/create-exam" style={{ color: "#fff" }}>
+                    Add Exame
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </div>
+            <div className="row">
+            
+              <div className="col-12 mb-3">
                   <div class="card">
                     <h4 class="card-header">lecture : 1</h4>
                     <div class="card-body">
@@ -217,12 +225,11 @@ export default function Course() {
                     </div>
                   </div>
                 </div>
-                */}
-              </div>
+              
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
