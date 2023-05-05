@@ -8,8 +8,6 @@ const Courses = () => {
 
   const fetchCourse=async()=>{
     await axios.get('http://127.0.0.1:8000/api/courses').then(({data})=>{setCourse(data.data)})
-    // await axios.get('http//127.0.0.1:8000/api/courses').then((data)=>{console.log(data)})
-  
   }
   useEffect(()=>{
     fetchCourse()

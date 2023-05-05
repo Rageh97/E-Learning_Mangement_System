@@ -20,17 +20,18 @@ function Index() {
   const fetchCourse = async () => {
     await axios
       .get(`http://127.0.0.1:8000/api/courses/${id}`)
-
-      .then(({ response }) => {
-        const course = response.data;
+      .then(({ data }) => {
+        // alert(data)
+        const course = data.data;
+        // console.log(course)
         setName(course.name);
         setCode(course.code);
         setDescription(course.description);
         setLevel(course.study_level);
         setSemester(course.semester_number);
       })
-      .catch(({ response: { response } }) => {
-        alert(response.message);
+      .catch(({ response: { data } }) => {
+        alert(data.message);
       });
   };
   useEffect(() => {

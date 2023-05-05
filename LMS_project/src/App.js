@@ -19,10 +19,10 @@ const App = () => {
           <Route index element={<AllCourses />} />
           <Route path="create-exam" element={<CreateExam />} />
           <Route path="add-course" element={<AddCourse />} />
-          <Route path="course" element={<Course />} />
+          <Route path="course/:id" element={<Course />} />
           <Route path="exam" element={<Exame />} />
           <Route path="course/list" element={<List />} />
-          <Route path="course/edit" element={<Edit />} />
+          <Route path="course/edit/:id" element={<Edit />} />
         </Route>
       </Routes>
     </BrowserRouter>
