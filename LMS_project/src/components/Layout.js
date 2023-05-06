@@ -6,7 +6,7 @@ import Footer from "./footer/index";
 export default function Index() {
   const [isActive, setIsActive] = useState(false);
   const BodyToggle = () => {
-    document.querySelector("body").classList.toggle("sidebar-icon-only");
+    document.querySelector("body").classList.toggle("sidebar-icon-only"); 
   };
   const ToggleMenu = () => {
     setIsActive(!isActive);
