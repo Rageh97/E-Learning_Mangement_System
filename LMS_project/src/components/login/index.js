@@ -1,65 +1,75 @@
-import React from 'react';
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBCheckbox,
-}
-from 'mdb-react-ui-kit';
-import './style.css'
+import React from "react";
+import "./style.css";
 function Login() {
   return (
-    <MDBContainer fluid className='p-4 login overflow-hidden'>
+    <section className="login">
+      <div className="px-4 py-5 px-md-5 text-center text-lg-start">
+        <div className="container-fluid">
+          <div className="row gx-lg-5 align-items-center">
+            <div className="col-lg-6 mb-5 mb-lg-0">
+              <h1
+                className="my-5 fw-bold"
+                style={{ color: "hsl(218, 81%, 95%)",fontSize: "3.5rem" }}
+              >
+                Al Azhar University
+              </h1>
+              <h5
+                className="mb-5 "
+                style={{ color: "hsl(218, 81%, 95%)", fontSize: "3rem" }}
+              >
+                Faculty Of Engineering, Department Of Systems And Computers
+              </h5>
+            </div>
 
-      <MDBRow>
-
-        <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
-          <h1 className='my-5 display-3 fw-bold' style={{color: 'hsl(218, 81%, 95%)'}}>Al Azhar University</h1>
-          <h5 className='mb-5 ' style={{color: 'hsl(218, 81%, 95%)',fontSize :'3rem'}}>Faculty Of Engineering, Department Of Systems And Computers</h5>
-          
-          {/* <h1 className="my-5 display-3 fw-bold ls-tight px-3" style={{color: 'hsl(218, 81%, 95%)'}}>
-          Al Azhar University<br />
-            <span style={{color: 'hsl(218, 81%, 75%)'}}>Faculty Of Engineering, Department Of Systems And Computers</span>
-          </h1>
-
-          <p className='px-3' style={{color: 'hsl(218, 81%, 85%)'}}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-            quibusdam tempora at cupiditate quis eum maiores libero
-            veritatis? Dicta facilis sint aliquid ipsum atque?
-          </p> */}
-
-        </MDBCol>
-
-        <MDBCol md='6' className='position-relative'>
-
-          <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
-          <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
-
-          <MDBCard className='my-5 bg-glass'>
-            <MDBCardBody className='p-5'>
-
-              <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email'/>
-              <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password'/>
-
-              <div className='d-flex justify-content-center mb-4'>
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
+            <div className="col-lg-6 mb-5 mb-lg-0">
+              <div className="card">
+                <div className="card-body py-5 px-md-5">
+                  <form>
+                    <div className="form-outline mb-4">
+                      <input
+                        type="text"
+                        id="form3Example3"
+                        className="form-control"
+                      />
+                      <label className="form-label" for="form3Example3">
+                        user name
+                      </label>
+                    </div>
+                    <div className="form-outline mb-4">
+                      <input
+                        type="password"
+                        id="form3Example4"
+                        className="form-control"
+                      />
+                      <label className="form-label" for="form3Example4">
+                        Password
+                      </label>
+                    </div>
+                    <div class="form-check d-flex justify-content-start mb-4">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="form1Example3"
+                      />
+                      <label class="form-check-label" for="form1Example3">
+                        Remember password
+                      </label>
+                    </div>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block mb-4"
+                    >
+                      login
+                    </button>
+                  </form>
+                </div>
               </div>
-
-              <MDBBtn className='w-100 mb-4' size='md'>sign in</MDBBtn>
-
-            </MDBCardBody>
-          </MDBCard>
-
-        </MDBCol>
-
-      </MDBRow>
-
-    </MDBContainer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
