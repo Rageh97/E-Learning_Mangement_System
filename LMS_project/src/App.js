@@ -6,6 +6,7 @@ import AllCourses from "./components/CoursePags/AllCourses/index";
 import List from "./components/CoursePags/ListOfCourses/index";
 import Edit from "./components/CoursePags/EditCourse/index";
 import CreateExam from "./components/Exame/Exam";
+import Profile from "./components/edit/index";
 import AddCourse from "./components/CoursePags/AddCourse/AddCourse";
 import Course from "./components/CoursePags/course/index";
 import Exame from "./components/examPage/index";
@@ -24,9 +25,9 @@ const App = () => {
           <Route path="exam" element={<Exame />} />
           <Route path="course/list" element={<List />} />
           <Route path="course/edit/:id" element={<Edit />} />
-          <Route path="login" element={<Login />} />
-
+          <Route path="/profile/edit" element={<Profile />} />
         </Route>
+          <Route path="login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,9 @@
 import React from "react";
 import "./style.css";
+import Footer from "../footer";
 function Login() {
   return (
+    <>
     <section className="login">
       <div className="px-4 py-5 px-md-5 text-center text-lg-start">
         <div className="container-fluid">
@@ -70,6 +72,8 @@ function Login() {
         </div>
       </div>
     </section>
+    <Footer/>
+    </>
   );
 }
 
