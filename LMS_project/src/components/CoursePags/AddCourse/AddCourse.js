@@ -18,7 +18,7 @@ function AddCourse() {
     
   }
 
-  const createProduct = async(e)=>{
+  const createCouse = async(e)=>{
       e.preventDefault();
       const formData = new FormData();
       formData.append('name', name)
@@ -43,7 +43,7 @@ function AddCourse() {
   }
   return (
     <>
-      <form className="w-75 m-auto py-2" onSubmit={createProduct}>
+      <form className="w-75 m-auto py-2" onSubmit={createCouse}>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label for="inputEmail4">name</label>

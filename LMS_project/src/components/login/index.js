@@ -1,7 +1,35 @@
-import React from "react";
+import React,{useState} from "react";
+import axios from "axios";
 import "./style.css";
 import Footer from "../footer";
+import { useNavigate } from "react-router";
 function Login() {
+  const navigate = useNavigate();
+  
+const[email,setEmail]=useState("");
+const[password,setPassword]=useState("");
+
+const featchLogin = async(e)=>{
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('email', email)
+  formData.append('password', password)
+  
+
+  // console.log(formData)
+  await axios.post('http://127.0.0.1:8000/api/login', formData)
+  .then(({data})=>{
+      alert(data.message)
+      navigate('/')
+  }).catch(({response})=>{
+      if (response.status === 422) {
+          alert(response.data.errors)
+      } else {
+          alert(response.data.message)
+      }
+  })
+}
+
   return (
     <>
     <section className="login">
@@ -26,12 +54,14 @@ function Login() {
             <div className="col-lg-6 mb-5 mb-lg-0">
               <div className="card">
                 <div className="card-body py-5 px-md-5">
-                  <form>
+                  <form onSubmit={featchLogin}>
                     <div className="form-outline mb-4">
                       <input
-                        type="text"
+                        type="email"
                         id="form3Example3"
                         className="form-control"
+                        value={email}
+                        onChange={(e)=>{setEmail(e.target.value)}}
                       />
                       <label className="form-label" for="form3Example3">
                         user name
@@ -42,22 +72,14 @@ function Login() {
                         type="password"
                         id="form3Example4"
                         className="form-control"
+                        value={password}
+                        onChange={(e)=>{setPassword(e.target.value)}}
                       />
                       <label className="form-label" for="form3Example4">
                         Password
                       </label>
                     </div>
-                    <div class="form-check d-flex justify-content-start mb-4">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="form1Example3"
-                      />
-                      <label class="form-check-label" for="form1Example3">
-                        Remember password
-                      </label>
-                    </div>
+
                     <button
                       type="submit"
                       className="btn btn-primary btn-block mb-4"
