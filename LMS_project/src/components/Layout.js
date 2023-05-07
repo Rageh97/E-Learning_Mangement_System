@@ -25,8 +25,8 @@ export default function Index() {
       <div className="container-scroller">
         <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a className="navbar-brand brand-logo mr-5" href="index.html">
-              Al_Azher
+            <a className="navbar-brand brand-logo mr-5" href="#">
+              AL-AZHAR UNIVERSITY
             </a>
             <a className="navbar-brand brand-logo-mini" href="/">
               <img src="image/logo.jpg" className="mr-2" alt="logo" />
