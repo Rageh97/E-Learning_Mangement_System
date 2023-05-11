@@ -24,8 +24,13 @@ export default function DashBoardLayout({ children }) {
       <div className="container-scroller">
         <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+<<<<<<< HEAD:LMS_project/src/view/layouts/DashboardLayout.jsx
             <a className="navbar-brand brand-logo mr-5" href="index.html">
               Al-Azher
+=======
+            <a className="navbar-brand brand-logo mr-5" href="#">
+              AL-AZHAR UNIVERSITY
+>>>>>>> 7c704ad2e066856c7b5e5c5cc4960d037a4211da:LMS_project/src/components/Layout.js
             </a>
             <a className="navbar-brand brand-logo-mini" href="/">
               <img src={window.location.origin + '/images/logo.jpg'} className="mr-2" alt="logo" />
