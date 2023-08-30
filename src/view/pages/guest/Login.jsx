@@ -12,28 +12,48 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  // generate id for user login
+  const generateUniqueId = () => {
+    const timestamp = Date.now().toString(36); // Convert timestamp to base36
+    const randomPart = Math.random().toString(36).substr(2, 5); // Random part of the ID
 
-  const featchLogin = async (e) => {
+    return timestamp + randomPart;
+  };
+  const handleLogin = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
+    if (email.includes("student")) {
+      const user = {
+        id: generateUniqueId(),
+        role: "student",
+        name,
+        password,
+      };
+      dispatch(login(user));
+      navigate(defaultPageForAuth.path);
+    } else if (email.includes("professor")) {
+      const user = {
+        id: generateUniqueId(),
+        role: "professor",
+        name,
+        password,
+      };
+      dispatch(login(user));
+      navigate(defaultPageForAuth.path);
+    } else if (email.includes("admin")) {
+      const user = {
+        id: generateUniqueId(),
+        role: "admin",
+        name,
+        password,
+      };
+      dispatch(login(user));
+      navigate(defaultPageForAuth.path);
+    } else {
+      alert("Invalid email or password");
+    }
 
-    // console.log(formData)
-    await axios
-      .post("http://127.0.0.1:8000/api/login", formData)
-      .then(({ data }) => {
-        alert(data.message);
-        navigate("/");
-      })
-      .catch(({ response }) => {
-        if (response.status === 422) {
-          alert(response.data.errors);
-        } else {
-          alert(response.data.message);
-        }
-      });
   };
 
   return (
@@ -60,9 +80,25 @@ function Login() {
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <div className="card">
                   <div className="card-body py-5 px-md-5">
-                    <form onSubmit={featchLogin}>
+                    <form onSubmit={handleLogin}>
                       <div className="form-outline mb-4">
                         <input
+                          type="text"
+                          id="form3Example3"
+                          className="form-control"
+                          value={name}
+                          required
+                          onChange={(e) => {
+                            setName(e.target.value);
+                          }}
+                        />
+                        <label className="form-label" for="form3Example3">
+                          user name
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
+                        required
                           type="email"
                           id="form3Example3"
                           className="form-control"
@@ -72,7 +108,7 @@ function Login() {
                           }}
                         />
                         <label className="form-label" for="form3Example3">
-                          user name
+                          email
                         </label>
                       </div>
                       <div className="form-outline mb-4">
@@ -81,6 +117,7 @@ function Login() {
                           id="form3Example4"
                           className="form-control"
                           value={password}
+                          required
                           onChange={(e) => {
                             setPassword(e.target.value);
                           }}
@@ -91,20 +128,9 @@ function Login() {
                       </div>
 
                       <button
-                        onClick={() => {
-                          dispatch(
-                            login({
-                              token: "test",
-                              user: {
-                                id: 1,
-                                name: "alaa",
-                                role: "student",
-                              },
-                            })
-                          );
-                          navigate(defaultPageForAuth.path);
-                        }}
-                        className="btn btn-primary btn-block mb-4"
+                      type="submit"
+                     
+                        className="bg-blue-600 w-full p-2 rounded-lg text-white mb-4 hover:bg-sky-700"
                       >
                         login
                       </button>

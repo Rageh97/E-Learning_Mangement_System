@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, redirect } from "react-router-dom";
 import Footer from "../components/common/Footer";
-
+import { logout } from "../../core/store/authSlice";
+import { useDispatch } from 'react-redux';
 export default function DashBoardLayout({ children }) {
   const [isActive, setIsActive] = useState(false);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    redirect("/login")
+  }
   const BodyToggle = () => {
     document.querySelector("body").classList.toggle("sidebar-icon-only"); 
   };
@@ -137,7 +143,7 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">All courses</span>
+                  <span className="menu-title ">Dashboard</span>
                 </NavLink>
               </li>
 
@@ -151,7 +157,7 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">add courses</span>
+                  <span className="menu-title">Add courses</span>
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -164,7 +170,7 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">list of courses</span>
+                  <span className="menu-title">List of courses</span>
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -178,6 +184,58 @@ export default function DashBoardLayout({ children }) {
                 >
                   <i className="icon-grid menu-icon"></i>
                   <span className="menu-title">Add Question</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/professor/add-question"
+                  onMouseOver={(e) => {
+                    MouseHover(e.target);
+                  }}
+                  onMouseOut={(e) => MouseOut(e.target)}
+                >
+                  <i className="icon-grid menu-icon"></i>
+                  <span className="menu-title">List of Professors</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/professor/add-question"
+                  onMouseOver={(e) => {
+                    MouseHover(e.target);
+                  }}
+                  onMouseOut={(e) => MouseOut(e.target)}
+                >
+                  <i className="icon-grid menu-icon"></i>
+                  <span className="menu-title">List of students</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/professor/add-question"
+                  onMouseOver={(e) => {
+                    MouseHover(e.target);
+                  }}
+                  onMouseOut={(e) => MouseOut(e.target)}
+                >
+                  <i className="icon-grid menu-icon"></i>
+                  <span className="menu-title">Settings</span>
+                </NavLink>
+              </li>
+              <li onClick={handleLogout} className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  
+                  onMouseOver={(e) => {
+                    MouseHover(e.target);
+                  }}
+                  onMouseOut={(e) => MouseOut(e.target)}
+                >
+                  <i className="icon-grid menu-icon"></i>
+                  <span className="menu-title">Logout</span>
                 </NavLink>
               </li>
             </ul>

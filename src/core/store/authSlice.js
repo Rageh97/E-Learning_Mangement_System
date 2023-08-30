@@ -2,23 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
   name: "auth",
-  initialState:{
-    is_authintcated : false , 
-    me : null,
-    token : null , 
+  initialState: {
+    is_authintcated:
+      JSON.parse(localStorage.getItem("is_authintcated")) || false,
+    user: JSON.parse(localStorage.getItem("user")) || null,
   },
   reducers: {
     logout: (state, action) => {
-        // clear localStorage 
-        state.is_authintcated = false ;
-        state.me = null ;
-        state.token = null ;
+      state.is_authintcated = false;
+      localStorage.clear();
     },
     login: (state, action) => {
-        // clear localStorage
-        state.is_authintcated = true ;
-        state.me = action.payload.me ;
-        state.token = action.payload.token ;
+      state.is_authintcated = true;
+      localStorage.setItem(
+        "is_authintcated",
+        JSON.stringify(state.is_authintcated)
+      );
+
+      state.user = action.payload;
+      localStorage.setItem("user", JSON.stringify(state.user));
     },
   },
 });
