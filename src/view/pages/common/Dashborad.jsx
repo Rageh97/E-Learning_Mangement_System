@@ -2,8 +2,7 @@ import LayoutRsolver from "../../layouts/LayoutResolver";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import BASE_URL from "../../../core/api_constant";
-import API_KEY from "../../../core/api_constant";
+
 export function Dashboard() {
   const [courses, setCourses] = useState([]);
   

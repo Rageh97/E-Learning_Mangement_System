@@ -10,7 +10,10 @@ import Exam from "../view/pages/student/exam/exam";
 import AddQuestion from "../view/pages/professor/exam/addQus";
 import EditProfile from "../view/pages/common/editprofile";
 import Welcome from "../view/pages/common/Welcome";
-
+import NotFound from "../view/pages/common/notFound";
+import AddUser from "../view/pages/admin/AddUser";
+import ProfList from "./../view/pages/admin/ProfList";
+import StudentList from "./../view/pages/admin/StudentList";
 const guest = [
   {
     name: "login",
@@ -90,7 +93,51 @@ const common = [
     element: <EditProfile />,
   },
 ];
+const admin = [
+  {
+    name: "AddUser",
+    path: "/add-user",
+    element: <AddUser />,
+  },
+  {
+    name: "ProfList",
+    path: "/professors-list",
+    element: <ProfList />,
+  },
+  {
+    name: "StudentList",
+    path: "/students-list",
+    element: <StudentList />,
+  },
+].map((page) => {
+  page.path = `/admin${page.path}`;
+  return page;
+});
 
-const allRoutes = [...common, ...professor, ...student, ...guest];
+const notfound = [
+  {
+    name: "notFound",
+    path: "*",
+    element: <NotFound />,
+  },
+];
 
-export { common, professor, student, guest, allRoutes, defaultPageForAuth };
+const allRoutes = [
+  ...common,
+  ...professor,
+  ...student,
+  ...guest,
+  ...notfound,
+  ...admin,
+];
+
+export {
+  common,
+  professor,
+  student,
+  guest,
+  allRoutes,
+  defaultPageForAuth,
+  notfound,
+  admin,
+};

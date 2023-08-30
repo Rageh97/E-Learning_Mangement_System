@@ -146,6 +146,19 @@ export default function DashBoardLayout({ children }) {
                   <span className="menu-title ">Dashboard</span>
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link "
+                  to="/admin/add-user"
+                  onMouseOver={(e) => {
+                    MouseHover(e.target);
+                  }}
+                  onMouseOut={(e) => MouseOut(e.target)}
+                >
+                  <i className="icon-grid menu-icon"></i>
+                  <span className="menu-title ">Add user</span>
+                </NavLink>
+              </li>
 
               <li className="nav-item">
                 <NavLink
@@ -189,7 +202,7 @@ export default function DashBoardLayout({ children }) {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  to="/professor/add-question"
+                  to="/admin/professors-list"
                   onMouseOver={(e) => {
                     MouseHover(e.target);
                   }}
@@ -202,7 +215,7 @@ export default function DashBoardLayout({ children }) {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  to="/professor/add-question"
+                  to="/admin/students-list"
                   onMouseOver={(e) => {
                     MouseHover(e.target);
                   }}
@@ -215,7 +228,7 @@ export default function DashBoardLayout({ children }) {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  to="/professor/add-question"
+                  to="/edit"
                   onMouseOver={(e) => {
                     MouseHover(e.target);
                   }}
