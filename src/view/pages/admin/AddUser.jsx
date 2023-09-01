@@ -35,7 +35,7 @@ const AddUser = () => {
             <input
               required
               type="text"
-              className="form-control"
+              className="form-control border-blue-400 border-1"
               placeholder="name"
               value={name}
               onChange={(e) => {
@@ -48,7 +48,7 @@ const AddUser = () => {
             <input
               required
               type="text"
-              className="form-control"
+              className="form-control border-blue-400 border-1"
               placeholder="code..."
               value={code}
               onChange={(e) => {
@@ -62,7 +62,7 @@ const AddUser = () => {
           <input
             required
             type="email"
-            className="form-control"
+            className="form-control border-blue-400 border-1"
             placeholder="email"
             value={email}
             onChange={(e) => {
@@ -77,7 +77,7 @@ const AddUser = () => {
             <select
               required
               id="inputState"
-              className="form-control"
+              className="form-control border-blue-400 border-1"
               value={level}
               onChange={(e) => {
                 setLevel(e.target.value);
@@ -95,7 +95,7 @@ const AddUser = () => {
             <select
               required
               id="inputState"
-              className="form-control"
+              className="form-control border-blue-400 border-1"
               value={role}
               onChange={(e) => {
                 setRole(e.target.value);

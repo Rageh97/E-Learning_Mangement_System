@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { NavLink, redirect } from "react-router-dom";
 import Footer from "../components/common/Footer";
 import { logout } from "../../core/store/authSlice";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 export default function DashBoardLayout({ children }) {
   const [isActive, setIsActive] = useState(false);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
-    redirect("/login")
-  }
+    redirect("/login");
+  };
   const BodyToggle = () => {
-    document.querySelector("body").classList.toggle("sidebar-icon-only"); 
+    document.querySelector("body").classList.toggle("sidebar-icon-only");
   };
   const ToggleMenu = () => {
     setIsActive(!isActive);
@@ -28,19 +28,23 @@ export default function DashBoardLayout({ children }) {
   return (
     <>
       <div className="container-scroller">
-        <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-          <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a className="navbar-brand brand-logo mr-5" href="index.html">
+        <nav  className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div style={{backgroundColor:"#1C4E80", important: "true" }} className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a style={{color:"white", important: "true" }} className="navbar-brand brand-logo mr-5 " href="/">
               Al-Azher
             </a>
             <a className="navbar-brand brand-logo-mini" href="/">
-              <img src={window.location.origin + '/images/logo.jpg'} className="mr-2" alt="logo" />
+              <img
+                src={window.location.origin + "/images/logo.jpg"}
+                className="mr-2"
+                alt="logo"
+              />
             </a>
           </div>
-          <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <div style={{backgroundColor:"#1C4E80", important: "true" }} className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <span
               onClick={() => BodyToggle()}
-              className="navbar-toggler navbar-toggler align-self-center"
+              className="navbar-toggler navbar-toggler align-self-center text-white"
               type="button"
               data-toggle="minimize"
             >
@@ -50,20 +54,26 @@ export default function DashBoardLayout({ children }) {
               <li className="nav-item nav-search d-none d-lg-block">
                 <div className="input-group">
                   <div
-                    className="input-group-prepend hover-cursor"
+                    className="input-group-prepend hover-cursor "
                     id="navbar-search-icon"
                   >
-                    <span className="input-group-text" id="search">
-                      <i className="icon-search"></i>
+                    <span className="input-group-text text-white" id="search">
+                      <i className="icon-search text-white"></i>
                     </span>
                   </div>
-                  <input
+                  {/* <input
                     type="text"
-                    className="form-control"
+                    className="form-control text-black bg-white m-2 outline-none"
                     id="navbar-search-input"
                     placeholder="Search now"
                     aria-label="search"
                     aria-describedby="search"
+                  /> */}
+                  <input type="text"
+                  style={{borderRadius:"15px"}} 
+                  className="form-control text-black bg-white m-2 outline-none px-2 py-1"
+                  id="navbar-search-input"
+                  placeholder="Search now"
                   />
                 </div>
               </li>
@@ -76,8 +86,8 @@ export default function DashBoardLayout({ children }) {
                   href="#"
                   data-toggle="dropdown"
                 >
-                  <i className="icon-bell mx-0"></i>
-                  <span className="count"></span>
+                  <i className="icon-bell mx-0 text-white"></i>
+                  <span className="count bg-white"></span>
                 </a>
                 <div
                   className="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -95,7 +105,11 @@ export default function DashBoardLayout({ children }) {
                   data-toggle="dropdown"
                   id="profileDropdown"
                 >
-                  <img src={process.env.PUBLIC_URL+"/images/icon_4.png"} alt="profile" />
+                  <img
+                  className="bg-white"
+                    src={process.env.PUBLIC_URL + "/images/icon_4.png"}
+                    alt="profile"
+                  />
                 </a>
                 <div
                   className="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -128,7 +142,7 @@ export default function DashBoardLayout({ children }) {
             className={
               isActive
                 ? "sidebar sidebar-offcanvas active"
-                : "sidebar sidebar-offcanvas"
+                : "sidebar sidebar-offcanvas  shadow-xl "
             }
             id="sidebar"
           >
@@ -143,10 +157,10 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title ">Dashboard</span>
+                  <span className="menu-title">Dashboard</span>
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ">
                 <NavLink
                   className="nav-link "
                   to="/admin/add-user"
@@ -156,7 +170,7 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title ">Add user</span>
+                  <span className="menu-title">Add user</span>
                 </NavLink>
               </li>
 
@@ -209,7 +223,9 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">List of Professors</span>
+                  <span className="menu-title">
+                    List of Professors
+                  </span>
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -222,7 +238,9 @@ export default function DashBoardLayout({ children }) {
                   onMouseOut={(e) => MouseOut(e.target)}
                 >
                   <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">List of students</span>
+                  <span className="menu-title">
+                    List of students
+                  </span>
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -241,7 +259,6 @@ export default function DashBoardLayout({ children }) {
               <li onClick={handleLogout} className="nav-item">
                 <NavLink
                   className="nav-link"
-                  
                   onMouseOver={(e) => {
                     MouseHover(e.target);
                   }}
@@ -255,7 +272,7 @@ export default function DashBoardLayout({ children }) {
           </nav>
 
           <div className="main-panel">
-              { children }
+            {children}
             <Footer />
           </div>
         </div>

@@ -1,12 +1,12 @@
 import React,{useState} from "react";
-import { useNavigate } from "react-router-dom";
-import axios from 'axios'
-import LayoutResolver from "../../../layouts/LayoutResolver";
 
+import LayoutResolver from "../../../layouts/LayoutResolver";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function AddCourse() {
   
-  const navigate = useNavigate();
-
+const [courses, setCourses] = useState([])
+console.log(courses);
   const [name,setNmae] = useState('')
   const [code,setCode] = useState('')
   const [description, setDescription] = useState('')
@@ -18,40 +18,43 @@ function AddCourse() {
       setImage(e.target.files[0]);
     
   }
-
-  const createCouse = async(e)=>{
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append('name', name)
-      formData.append('semester_number', semester_number)
-      formData.append('code', code)
-      formData.append('description', description)
-      formData.append('study_level', level)
-      formData.append('image', image)
-
-      // console.log(formData)
-      await axios.post('http://127.0.0.1:8000/api/courses', formData)
-      .then(({data})=>{
-          alert(data.message)
-          navigate('/')
-      }).catch(({response})=>{
-          if (response.status === 422) {
-              alert(response.data.errors)
-          } else {
-              alert(response.data.message)
-          }
-      })
+  const handleCreateCourse = (e) => {
+    e.preventDefault()
+    const course = {
+      name,
+      code,
+      description,
+      level,
+      semester_number,
+      image
+    }
+    setCourses([...courses, course])
+    // localStorage.setItem('courses', JSON.stringify(courses))
+    setCode('')
+    setImage('')
+    setDescription('')
+    setLevel('')
+    setNmae('')
+    setSemester('')
+    toast.success("course created successfuly !", {
+      position: toast.POSITION.CENTER,
+    });
   }
+
+
   return (
     <>
     <LayoutResolver>
-      <form className="w-75 m-auto py-2" onSubmit={createCouse}>
+      <ToastContainer/>
+      <form className="w-75 m-auto py-2" onSubmit={handleCreateCourse}>
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div  className="form-group col-md-6 ">
             <label for="inputEmail4">name</label>
             <input
+            style={{outline:"none"}}
+           required
               type="text"
-              className="form-control"
+              className="form-control  border-blue-400 border-1"
               placeholder="name"
               value={name}
               onChange={(e)=>{setNmae(e.target.value)}}
@@ -60,8 +63,9 @@ function AddCourse() {
           <div className="form-group col-md-6">
             <label for="inputPassword4">code</label>
             <input
+            required
               type="text"
-              className="form-control"
+              className="form-control border-blue-400 border-1"
               
               placeholder="code..."
               value={code}
@@ -71,7 +75,8 @@ function AddCourse() {
         </div>
         <div className="form-group">
           <label for="inputAddress">discription</label>
-          <textarea className="form-control" placeholder="discription"
+          <textarea className="form-control border-blue-400 border-1" placeholder="discription"
+          required
             value={description}
             onChange={(e)=>{setDescription(e.target.value)}}
           >
@@ -83,11 +88,13 @@ function AddCourse() {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label for="inputCity">image</label>
-            <input type="file" className="form-control"onChange={changeHandler} />
+            <input type="file" className="form-control border-blue-400 border-1"onChange={changeHandler}
+            required />
           </div>
           <div className="form-group col-md-4">
             <label for="inputState">study_level</label>
-            <select id="inputState" className="form-control"
+            <select id="inputState" className="form-control border-blue-400 border-1"
+            required
               value={level}
               onChange={(e)=>{setLevel(e.target.value)}}
               > 
@@ -100,7 +107,8 @@ function AddCourse() {
           </div>
           <div classNameName="form-group col-md-2">
           <label for="inputState">semester</label>
-            <select id="inputState" className="form-control"
+            <select id="inputState" className="form-control border-blue-400 border-1"
+            required
               value={semester_number}
               onChange={(e)=>{setSemester(e.target.value)}}
             >
@@ -112,7 +120,7 @@ function AddCourse() {
           </div>
         </div>
       
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="rounded-lg bg-blue-600 text-slate-50 py-2 px-3 hover:bg-blue-500">
           save
         </button>
       </form>
