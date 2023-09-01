@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { ButtonGroup, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import LayoutResolver from "../../../layouts/LayoutResolver";
-import { courses } from "../../../../core/constants";
+
 export default function Course() {
+  const courses = JSON.parse(localStorage.getItem("courses"));
   const { id } = useParams();
   const course = courses.find((course) => course.id === id);
   return (

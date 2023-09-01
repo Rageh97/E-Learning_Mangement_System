@@ -1,71 +1,50 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Button, ButtonGroup, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import LayoutResolver from "../../../layouts/LayoutResolver";
 export default function ListOfCourses() {
+  const courses = JSON.parse(localStorage.getItem("courses"));
 
-  
-  const [courses, setCourse] = useState([]);
-
-  const fetchCourse = async () => {
-    await axios.get("http://127.0.0.1:8000/api/courses").then(({ data }) => {
-      console.log(data);
-      setCourse(data.data);
-    });
-  };
-  useEffect(() => {
-    fetchCourse();
-  }, []);
-
-  const deleteCourse = async (id) => {
-    await axios
-      .delete("http://127.0.0.1:8000/api/courses/" + id)
-      .then(({ data }) => {
-        alert(data.message);
-        fetchCourse();
-      })
-      .catch(({ response: { data } }) => {
-        alert(data.message);
-      });
-  };
-
-  const AllCourses = courses.map((course, index) => (
-    <tr key={index}>
-      <td>{++index}</td>
-      <td>{course.code}</td>
+  const AllCourses = courses?.map((course, index) => (
+    <tr className="bg-teal-200" key={index}>
       <td>{course.name}</td>
+      <td>{course.code}</td>
+      <td>{course.semester}</td>
+      <td>{course.level}</td>
+      <td>{course.professor}</td>
       <td>
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="success">
-            <Link to={`/course/edit/${course.id}`}
-            style={{color:"#fff"}}>Edit</Link>
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => deleteCourse(course.id)}>
-            Delete
-          </Button>
-        </ButtonGroup>
+       
+          <button className="bg-green-700 text-white p-2 mx-1 rounded-lg">
+            <Link className=" text-decoration-none text-white" to={`/course/edit/${course.id}`}>
+              Edit
+            </Link>
+          </button>
+          <button className="bg-red-700 text-white p-2 mx-1 rounded-lg">Delete</button>
+        
       </td>
     </tr>
   ));
 
   return (
     <LayoutResolver>
-      <Table bordered hover striped className="w-75 m-auto mt-3">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>code</th>
-            <th style={{ width: "40%" }}>name</th>
-            <th style={{ width: "10%" }}></th>
-          </tr>
-        </thead>
-        <tbody>
-          {AllCourses}
-        </tbody>
-      </Table>
+      <div className="m-10">
+        <h1 className="mb-2 text-lg fw-bold text-center">
+          List of <span className="text-blue-700">Courses</span>{" "}
+        </h1>
+        <Table className="border-separate border-spacing-1  w-full ">
+          <thead>
+            <tr className="bg-teal-500">
+              <th>Name</th>
+              <th>Code</th>
+              <th>Semester</th>
+              <th>Level</th>
+              <th>Professor</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>{AllCourses}</tbody>
+        </Table>
+      </div>
     </LayoutResolver>
   );
 }

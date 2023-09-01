@@ -110,7 +110,7 @@ const AddUser = () => {
 
         <button
           type="submit"
-          className="rounded-lg bg-blue-600 text-slate-50 py-2 px-3 hover:bg-blue-500"
+          className="rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-slate-50 py-2 px-3 "
         >
           save
         </button>

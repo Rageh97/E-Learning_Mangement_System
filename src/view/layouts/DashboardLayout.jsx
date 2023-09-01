@@ -29,7 +29,7 @@ export default function DashBoardLayout({ children }) {
     <>
       <div className="container-scroller">
         <nav  className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-          <div style={{backgroundColor:"#1C4E80", important: "true" }} className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <div style={{backgroundColor:"#1e005a", important: "true" }} className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
             <a style={{color:"white", important: "true" }} className="navbar-brand brand-logo mr-5 " href="/">
               Al-Azher
             </a>
@@ -41,7 +41,7 @@ export default function DashBoardLayout({ children }) {
               />
             </a>
           </div>
-          <div style={{backgroundColor:"#1C4E80", important: "true" }} className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <div style={{backgroundColor:"#1e005a", important: "true" }} className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
             <span
               onClick={() => BodyToggle()}
               className="navbar-toggler navbar-toggler align-self-center text-white"
@@ -61,17 +61,10 @@ export default function DashBoardLayout({ children }) {
                       <i className="icon-search text-white"></i>
                     </span>
                   </div>
-                  {/* <input
-                    type="text"
-                    className="form-control text-black bg-white m-2 outline-none"
-                    id="navbar-search-input"
-                    placeholder="Search now"
-                    aria-label="search"
-                    aria-describedby="search"
-                  /> */}
+               
                   <input type="text"
-                  style={{borderRadius:"15px"}} 
-                  className="form-control text-black bg-white m-2 outline-none px-2 py-1"
+                  style={{borderRadius:"10px"}} 
+                  className="form-control text-black bg-white m-2 outline-none px-1 h-9"
                   id="navbar-search-input"
                   placeholder="Search now"
                   />
@@ -271,7 +264,7 @@ export default function DashBoardLayout({ children }) {
             </ul>
           </nav>
 
-          <div className="main-panel">
+          <div className="main-panel ">
             {children}
             <Footer />
           </div>
