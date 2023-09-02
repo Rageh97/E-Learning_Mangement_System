@@ -5,6 +5,8 @@ import { logout } from "../../core/store/authSlice";
 import { useDispatch } from "react-redux";
 export default function DashBoardLayout({ children }) {
   const [isActive, setIsActive] = useState(false);
+  const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
@@ -24,13 +26,21 @@ export default function DashBoardLayout({ children }) {
   const MouseOut = (element) => {
     element.parentElement.classList.remove("hover-open");
   };
-
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <div className="container-scroller">
-        <nav  className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-          <div style={{backgroundColor:"#1e005a", important: "true" }} className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a style={{color:"white", important: "true" }} className="navbar-brand brand-logo mr-5 " href="/">
+        {/* header */}
+        <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div
+            style={{ backgroundColor: "#1e005a", important: "true" }}
+            className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+          >
+            <a
+              style={{ color: "white", important: "true" }}
+              className="navbar-brand brand-logo mr-5 "
+              href="/"
+            >
               Al-Azher
             </a>
             <a className="navbar-brand brand-logo-mini" href="/">
@@ -41,7 +51,10 @@ export default function DashBoardLayout({ children }) {
               />
             </a>
           </div>
-          <div style={{backgroundColor:"#1e005a", important: "true" }} className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <div
+            style={{ backgroundColor: "#1e005a", important: "true" }}
+            className="navbar-menu-wrapper d-flex align-items-center justify-content-end"
+          >
             <span
               onClick={() => BodyToggle()}
               className="navbar-toggler navbar-toggler align-self-center text-white"
@@ -61,18 +74,27 @@ export default function DashBoardLayout({ children }) {
                       <i className="icon-search text-white"></i>
                     </span>
                   </div>
-               
-                  <input type="text"
-                  style={{borderRadius:"10px"}} 
-                  className="form-control text-black bg-white m-2 outline-none px-1 h-9"
-                  id="navbar-search-input"
-                  placeholder="Search now"
+
+                  <input
+                    type="text"
+                    style={{ borderRadius: "10px" }}
+                    className="form-control text-black bg-white m-2 outline-none px-1 h-9"
+                    id="navbar-search-input"
+                    placeholder="Search now"
                   />
                 </div>
               </li>
             </ul>
+
             <ul className="navbar-nav navbar-nav-right">
               <li className="nav-item dropdown">
+                {user || userInfo ? (
+                  <p className="text-white mx-2">
+                    {userInfo?.fullName ? userInfo.fullName : user.name}
+                  </p>
+                ) : (
+                  ""
+                )}
                 <a
                   className="nav-link count-indicator dropdown-toggle"
                   id="notificationDropdown"
@@ -99,8 +121,12 @@ export default function DashBoardLayout({ children }) {
                   id="profileDropdown"
                 >
                   <img
-                  className="bg-white"
-                    src={process.env.PUBLIC_URL + "/images/icon_4.png"}
+                    className="bg-white"
+                    src={`${
+                      userInfo?.image
+                        ? userInfo?.image
+                        : process.env.PUBLIC_URL + "/images/icon_4.png"
+                    }`}
                     alt="profile"
                   />
                 </a>
@@ -112,7 +138,7 @@ export default function DashBoardLayout({ children }) {
                     <i className="ti-settings text-primary"></i>
                     Settings
                   </NavLink>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" onClick={handleLogout}>
                     <i className="ti-power-off text-primary"></i>
                     Logout
                   </a>
@@ -129,7 +155,7 @@ export default function DashBoardLayout({ children }) {
             </span>
           </div>
         </nav>
-
+        {/* side bar */}
         <div className="container-fluid page-body-wrapper">
           <nav
             className={
@@ -139,132 +165,163 @@ export default function DashBoardLayout({ children }) {
             }
             id="sidebar"
           >
-            <ul className="nav" id="nav-sid">
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link "
-                  to="/student/courses"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">Dashboard</span>
-                </NavLink>
-              </li>
-              <li className="nav-item ">
-                <NavLink
-                  className="nav-link "
-                  to="/admin/add-user"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">Add user</span>
-                </NavLink>
-              </li>
+            {user || userInfo ? (
+              <>
+                <ul className="nav" id="nav-sid">
+                  {user.role === "student" || user.role === "professor" ? (
+                    <li className="nav-item">
+                      <NavLink
+                        className="nav-link "
+                        to="/student/courses"
+                        onMouseOver={(e) => {
+                          MouseHover(e.target);
+                        }}
+                        onMouseOut={(e) => MouseOut(e.target)}
+                      >
+                        <i className="icon-grid menu-icon"></i>
+                        <span className="menu-title">Dashboard</span>
+                      </NavLink>
+                    </li>
+                  ) : null}
+                  {user?.role == "admin" || user.role == "professor" ? (
+                    <>
+                      {user?.role == "admin" ? (
+                        <>
+                          {" "}
+                          <li className="nav-item">
+                            <NavLink
+                              className="nav-link "
+                              to="/dashboard"
+                              onMouseOver={(e) => {
+                                MouseHover(e.target);
+                              }}
+                              onMouseOut={(e) => MouseOut(e.target)}
+                            >
+                              <i className="icon-grid menu-icon"></i>
+                              <span className="menu-title">Dashboard</span>
+                            </NavLink>
+                          </li>
+                          <li className="nav-item ">
+                            <NavLink
+                              className="nav-link "
+                              to="/admin/add-user"
+                              onMouseOver={(e) => {
+                                MouseHover(e.target);
+                              }}
+                              onMouseOut={(e) => MouseOut(e.target)}
+                            >
+                              <i className="icon-grid menu-icon"></i>
+                              <span className="menu-title">Add user</span>
+                            </NavLink>
+                          </li>
+                          <li className="nav-item">
+                            <NavLink
+                              className="nav-link"
+                              to="/admin/professors-list"
+                              onMouseOver={(e) => {
+                                MouseHover(e.target);
+                              }}
+                              onMouseOut={(e) => MouseOut(e.target)}
+                            >
+                              <i className="icon-grid menu-icon"></i>
+                              <span className="menu-title">
+                                List of Professors
+                              </span>
+                            </NavLink>
+                          </li>
+                          <li className="nav-item">
+                            <NavLink
+                              className="nav-link"
+                              to="/admin/students-list"
+                              onMouseOver={(e) => {
+                                MouseHover(e.target);
+                              }}
+                              onMouseOut={(e) => MouseOut(e.target)}
+                            >
+                              <i className="icon-grid menu-icon"></i>
+                              <span className="menu-title">
+                                List of students
+                              </span>
+                            </NavLink>
+                          </li>
+                        </>
+                      ) : null}
 
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/professor/add-course"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">Add courses</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/professor/list-courses"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">List of courses</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/professor/add-question"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">Add Question</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/admin/professors-list"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">
-                    List of Professors
-                  </span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/admin/students-list"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">
-                    List of students
-                  </span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  to="/edit"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">Settings</span>
-                </NavLink>
-              </li>
-              <li onClick={handleLogout} className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  onMouseOver={(e) => {
-                    MouseHover(e.target);
-                  }}
-                  onMouseOut={(e) => MouseOut(e.target)}
-                >
-                  <i className="icon-grid menu-icon"></i>
-                  <span className="menu-title">Logout</span>
-                </NavLink>
-              </li>
-            </ul>
+                      <li className="nav-item">
+                        <NavLink
+                          className="nav-link"
+                          to="/professor/add-course"
+                          onMouseOver={(e) => {
+                            MouseHover(e.target);
+                          }}
+                          onMouseOut={(e) => MouseOut(e.target)}
+                        >
+                          <i className="icon-grid menu-icon"></i>
+                          <span className="menu-title">Add courses</span>
+                        </NavLink>
+                      </li>
+
+                      <li className="nav-item">
+                        <NavLink
+                          className="nav-link"
+                          to="/professor/add-question"
+                          onMouseOver={(e) => {
+                            MouseHover(e.target);
+                          }}
+                          onMouseOut={(e) => MouseOut(e.target)}
+                        >
+                          <i className="icon-grid menu-icon"></i>
+                          <span className="menu-title">Add Question</span>
+                        </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink
+                          className="nav-link"
+                          to="/professor/list-courses"
+                          onMouseOver={(e) => {
+                            MouseHover(e.target);
+                          }}
+                          onMouseOut={(e) => MouseOut(e.target)}
+                        >
+                          <i className="icon-grid menu-icon"></i>
+                          <span className="menu-title">List of courses</span>
+                        </NavLink>
+                      </li>
+                    </>
+                  ) : null}
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      to="/edit"
+                      onMouseOver={(e) => {
+                        MouseHover(e.target);
+                      }}
+                      onMouseOut={(e) => MouseOut(e.target)}
+                    >
+                      <i className="icon-grid menu-icon"></i>
+                      <span className="menu-title">Settings</span>
+                    </NavLink>
+                  </li>
+                  <li onClick={handleLogout} className="nav-item">
+                    <NavLink
+                      className="nav-link"
+                      onMouseOver={(e) => {
+                        MouseHover(e.target);
+                      }}
+                      onMouseOut={(e) => MouseOut(e.target)}
+                    >
+                      <i className="icon-grid menu-icon"></i>
+                      <span className="menu-title">Logout</span>
+                    </NavLink>
+                  </li>
+                </ul>
+              </>
+            ) : (
+              ""
+            )}
           </nav>
 
-          <div className="main-panel ">
+          <div className="main-panel">
             {children}
             <Footer />
           </div>
