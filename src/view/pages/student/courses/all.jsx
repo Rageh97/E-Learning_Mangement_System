@@ -24,15 +24,20 @@ const Courses = () => {
           </div>
           <p className="text-sm mb-2">{course.description}</p>
           <p className="card-text mb-2">
-            <span className="text-red-700 fw-bold">prof:</span> {course.professor}
+            <span className="text-red-700 fw-bold">prof:</span>{" "}
+            {course.professor}
           </p>
-          <Link
-          style={{backgroundColor:'#800060'}}
-            to={`/student/courses/${course.id}`}
-            className=" text-white p-2 rounded-xl text-decoration-none"
+          <button
+            className="p-2 rounded-xl w-24 opacity-75 "
+            style={{ backgroundColor: "#800060" }}
           >
-            View
-          </Link>
+            <Link
+              to={`/student/courses/${course.id}`}
+              className=" text-white text-decoration-none"
+            >
+              View
+            </Link>
+          </button>
         </div>
       </div>
     </div>
@@ -40,12 +45,12 @@ const Courses = () => {
   return (
     <LayoutResolver>
       <Fragment>
-        <section className="bg-light py-5 py-xl-8">
+        <section className=" bg-gray-100 py-5 py-xl-8">
           <div className="container overflow-hidden  ">
             <div className="gy-md-0">
               <div className="text-md-start">
-                <div className="text-lg-left text-md-center text-sm-center">
-                  <h3 className="bg-gray-300 p-2  fw-bold text-xl mb-3 ">
+                <div className="text-lg-left ">
+                  <h3  style={{ color: "#800060" }} className="bg-white p-2  fw-bold text-xl mb-3 shadow-xl">
                     Dashboard / Courses
                   </h3>
                 </div>

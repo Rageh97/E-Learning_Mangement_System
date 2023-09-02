@@ -31,7 +31,7 @@ function Login() {
         password,
       };
       dispatch(login(user));
-      navigate(defaultPageForAuth.path);
+      navigate("/student/courses");
     } else if (email.includes("professor")) {
       const user = {
         id: generateUniqueId(),

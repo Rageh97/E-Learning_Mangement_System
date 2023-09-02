@@ -28,9 +28,9 @@ export default function ListOfCourses() {
   return (
     <LayoutResolver>
       <div className="m-10">
-        <h1 className="mb-2 text-lg fw-bold text-center">
-          List of <span className="text-blue-700">Courses</span>{" "}
-        </h1>
+      <h3  style={{ color: "#800060" }} className="bg-white p-2  fw-bold text-xl mb-3 shadow-xl">
+                    List Of Courses
+                  </h3>
         <Table className="border-separate border-spacing-1  w-full ">
           <thead>
             <tr className="bg-teal-500">
