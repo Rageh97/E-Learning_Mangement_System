@@ -59,11 +59,7 @@ const AreaChart = () => {
       },
     ],
   };
-  return (
-    <div className="w-full h-64 mt-4">
-      <Line options={options} data={data} />
-    </div>
-  );
+  return <Line  options={options} data={data} />;
 };
 
 export default AreaChart;

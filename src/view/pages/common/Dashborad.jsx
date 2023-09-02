@@ -3,6 +3,7 @@ import React from "react";
 import AreaChart from "../../components/charts/AreaChart";
 
 import BoxCharts from "../../components/charts/BoxCharts";
+import ChartEvents from "../../components/charts/ChartEvents";
 export function Dashboard() {
   return (
     <LayoutRsolver>
@@ -17,8 +18,15 @@ export function Dashboard() {
                   </h3>
                 </div>
                 <div className="row">
-                  <BoxCharts/>
-                  <AreaChart />
+                  <BoxCharts />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                    <AreaChart />
+                    </div>
+                    <div>
+                    <ChartEvents />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
