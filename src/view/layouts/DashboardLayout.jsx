@@ -33,7 +33,7 @@ export default function DashBoardLayout({ children }) {
         {/* header */}
         <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div
-            style={{ backgroundColor: "#1e005a", important: "true" }}
+            style={{ backgroundColor: "#1C4E80", important: "true" }}
             className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
           >
             <a
@@ -52,7 +52,7 @@ export default function DashBoardLayout({ children }) {
             </a>
           </div>
           <div
-            style={{ backgroundColor: "#1e005a", important: "true" }}
+            style={{ backgroundColor: "#1C4E80", important: "true" }}
             className="navbar-menu-wrapper d-flex align-items-center justify-content-end"
           >
             <span
@@ -199,6 +199,19 @@ export default function DashBoardLayout({ children }) {
                             >
                               <i className="icon-grid menu-icon"></i>
                               <span className="menu-title">Dashboard</span>
+                            </NavLink>
+                          </li>
+                          <li className="nav-item">
+                            <NavLink
+                              className="nav-link "
+                              to="/student/courses"
+                              onMouseOver={(e) => {
+                                MouseHover(e.target);
+                              }}
+                              onMouseOut={(e) => MouseOut(e.target)}
+                            >
+                              <i className="icon-grid menu-icon"></i>
+                              <span className="menu-title">Courses</span>
                             </NavLink>
                           </li>
                           <li className="nav-item ">

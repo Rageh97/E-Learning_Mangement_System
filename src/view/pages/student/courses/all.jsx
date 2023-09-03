@@ -50,11 +50,22 @@ const Courses = () => {
             <div className="gy-md-0">
               <div className="text-md-start">
                 <div className="text-lg-left ">
-                  <h3  style={{ color: "#800060" }} className="bg-white p-2  fw-bold text-xl mb-3 shadow-xl">
+                  <h3
+                    style={{ backgroundColor: "#F1F1F1" }}
+                    className=" p-2 shadow-md text-gray-500 fw-bold text-xl mb-3"
+                  >
                     Dashboard / Courses
                   </h3>
                 </div>
-                <div className="row">{AllCourses}</div>
+                <div className="row">
+                  {AllCourses ? (
+                    AllCourses
+                  ) : (
+                    <div className="text-center bg-red-200 p-2 rounded-md shadow-md">
+                      No Courses Yet, Go and Add Courses !
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
