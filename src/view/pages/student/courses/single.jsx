@@ -7,6 +7,8 @@ export default function Course() {
   const courses = JSON.parse(localStorage.getItem("courses"));
   const { id } = useParams();
   const course = courses.find((course) => course.id === id);
+  const [material, setMaterial] = useState("");
+
   return (
     <>
       <LayoutResolver>
@@ -15,18 +17,14 @@ export default function Course() {
             <div className="gy-md-0">
               <div className="text-md-start">
                 <div className="text-lg-left text-md-center text-sm-center">
-                  <h3 className="display-3 fw-bolder">{course.name}</h3>
-                  <span
-                    className="w-25 mx-auto ms-md-0 mb-2 d-inline-block bg-dark"
-                    style={{ height: 2 + "px" }}
-                  ></span>
-                  <br />
-                  <span
-                    className="mx-auto w-50 ms-md-0 mb-4 d-inline-block bg-dark"
-                    style={{ height: 2 + "px" }}
-                  ></span>
+                  <h3
+                    style={{ backgroundColor: "#F1F1F1" }}
+                    className=" text-4xl p-2 shadow-md text-cyan-800 fw-bold  mb-3 mt-5 mx-3"
+                  >
+                    {course?.name}
+                  </h3>
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <ButtonGroup>
                     <Button variant="success"> Add content</Button>
                     <Button variant="secondary"> Add Assginment</Button>
@@ -36,42 +34,49 @@ export default function Course() {
                       </Link>
                     </Button>
                   </ButtonGroup>
-                </div>
+                </div> */}
                 <div className="row">
                   <div className="col-12 mb-3">
-                    <div class="card">
-                      <h4 class="card-header">lecture : 1</h4>
-                      <div class="card-body">
-                        <h5 class="card-title">
+                    <div className="card">
+                      <h4 className="card-header">lecture : 1</h4>
+                      <div className="card-body">
+                        <h5 className="card-title">
                           <a href="#"> introduction</a>
                         </h5>
-                        <p class="card-text">
+                        <p className="card-text">
                           <h6>Assginment :1</h6>
-                          With supporting text below as a natural lead-in to
-                          additional content.
+                          {/* With supporting text below as a natural lead-in to
+                          additional content. */}
+                          {material
+                            ? material
+                            : "With supporting text below as a natural lead-in to additional content."}
                         </p>
-                        <div class="row w-50 justify-content-center align-items-center">
-                          <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                            <a href="#" class="btn btn-primary ">
+                        <div className="row w-50 justify-content-center align-items-center">
+                          <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+                            <a
+                              href="#"
+                              className="mt-4  text-decoration-none rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:text-slate-50 hover:to-yellow-500 text-slate-50 py-2 px-3 "
+                            >
                               <i
-                                class="fa fa-download me-2"
+                                className="fa fa-download me-2"
                                 aria-hidden="true"
                               ></i>
                               download
                             </a>
                           </div>
-                          <div class="col-sm-12  col-md-6 col-lg-6 mb-2">
-                            <form class="btn btn-primary d-flex justify-content-around align-items-center">
-                              <label for="upload" class="mb-0">
+                          <div className="col-sm-12  col-md-6 col-lg-6 mb-2">
+                            <form className="mt-2  w-32 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:text-slate-50 hover:to-yellow-500 text-slate-50 py-2 px-3  d-flex justify-content-around align-items-center">
+                              <label for="upload" className="mb-0">
                                 <i
-                                  class="fa fa-upload me-2"
+                                  className="fa fa-upload me-2"
                                   aria-hidden="true"
                                 ></i>
                                 upload
                               </label>
                               <input
+                                onChange={(e) => setMaterial(e.target.files[0])}
                                 type="file"
-                                class="form-control-file"
+                                className="form-control-file"
                                 hidden
                                 id="upload"
                               />
@@ -82,39 +87,46 @@ export default function Course() {
                     </div>
                   </div>
                   <div className="col-12 mb-3">
-                    <div class="card">
-                      <h4 class="card-header">lecture : 2</h4>
-                      <div class="card-body">
-                        <h5 class="card-title">
-                          <a href="#"> chapter:1</a>
+                    <div className="card">
+                      <h4 className="card-header">lecture : 1</h4>
+                      <div className="card-body">
+                        <h5 className="card-title">
+                          <a href="#"> introduction</a>
                         </h5>
-                        <p class="card-text">
+                        <p className="card-text">
                           <h6>Assginment :1</h6>
-                          With supporting text below as a natural lead-in to
-                          additional content.
+                          {/* With supporting text below as a natural lead-in to
+                          additional content. */}
+                          {material
+                            ? material
+                            : "With supporting text below as a natural lead-in to additional content."}
                         </p>
-                        <div class="row w-50 justify-content-center align-items-center">
-                          <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                            <a href="#" class="btn btn-primary ">
+                        <div className="row w-50 justify-content-center align-items-center">
+                          <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+                            <a
+                              href="#"
+                              className="mt-4  text-decoration-none rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:text-slate-50 hover:to-yellow-500 text-slate-50 py-2 px-3 "
+                            >
                               <i
-                                class="fa fa-download me-2"
+                                className="fa fa-download me-2"
                                 aria-hidden="true"
                               ></i>
                               download
                             </a>
                           </div>
-                          <div class="col-sm-12  col-md-6 col-lg-6 mb-2">
-                            <form class="btn btn-primary d-flex justify-content-around align-items-center">
-                              <label for="upload" class="mb-0">
+                          <div className="col-sm-12  col-md-6 col-lg-6 mb-2">
+                            <form className="mt-2  w-32 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:text-slate-50 hover:to-yellow-500 text-slate-50 py-2 px-3  d-flex justify-content-around align-items-center">
+                              <label for="upload" className="mb-0">
                                 <i
-                                  class="fa fa-upload me-2"
+                                  className="fa fa-upload me-2"
                                   aria-hidden="true"
                                 ></i>
                                 upload
                               </label>
                               <input
+                                onChange={(e) => setMaterial(e.target.files[0])}
                                 type="file"
-                                class="form-control-file"
+                                className="form-control-file"
                                 hidden
                                 id="upload"
                               />
@@ -125,82 +137,46 @@ export default function Course() {
                     </div>
                   </div>
                   <div className="col-12 mb-3">
-                    <div class="card">
-                      <h4 class="card-header">lecture : 3</h4>
-                      <div class="card-body">
-                        <h5 class="card-title">
-                          <a href="#"> chapter :2</a>
+                    <div className="card">
+                      <h4 className="card-header">lecture : 1</h4>
+                      <div className="card-body">
+                        <h5 className="card-title">
+                          <a href="#"> introduction</a>
                         </h5>
-                        <p class="card-text">
+                        <p className="card-text">
                           <h6>Assginment :1</h6>
-                          With supporting text below as a natural lead-in to
-                          additional content.
+                          {/* With supporting text below as a natural lead-in to
+                          additional content. */}
+                          {material
+                            ? material
+                            : "With supporting text below as a natural lead-in to additional content."}
                         </p>
-                        <div class="row w-50 justify-content-center align-items-center">
-                          <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                            <a href="#" class="btn btn-primary ">
+                        <div className="row w-50 justify-content-center align-items-center">
+                          <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+                            <a
+                              href="#"
+                              className="mt-4  text-decoration-none rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:text-slate-50 hover:to-yellow-500 text-slate-50 py-2 px-3 "
+                            >
                               <i
-                                class="fa fa-download me-2"
+                                className="fa fa-download me-2"
                                 aria-hidden="true"
                               ></i>
                               download
                             </a>
                           </div>
-                          <div class="col-sm-12  col-md-6 col-lg-6 mb-2">
-                            <form class="btn btn-primary d-flex justify-content-around align-items-center">
-                              <label for="upload" class="mb-0">
+                          <div className="col-sm-12  col-md-6 col-lg-6 mb-2">
+                            <form className="mt-2  w-32 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:text-slate-50 hover:to-yellow-500 text-slate-50 py-2 px-3  d-flex justify-content-around align-items-center">
+                              <label for="upload" className="mb-0">
                                 <i
-                                  class="fa fa-upload me-2"
+                                  className="fa fa-upload me-2"
                                   aria-hidden="true"
                                 ></i>
                                 upload
                               </label>
                               <input
+                                onChange={(e) => setMaterial(e.target.files[0])}
                                 type="file"
-                                class="form-control-file"
-                                hidden
-                                id="upload"
-                              />
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 mb-3">
-                    <div class="card">
-                      <h4 class="card-header">lecture : 4</h4>
-                      <div class="card-body">
-                        <h5 class="card-title">
-                          <a href="#"> chapter : 3</a>
-                        </h5>
-                        <p class="card-text">
-                          <h6>Assginment :1</h6>
-                          With supporting text below as a natural lead-in to
-                          additional content.
-                        </p>
-                        <div class="row w-50 justify-content-center align-items-center">
-                          <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                            <a href="#" class="btn btn-primary ">
-                              <i
-                                class="fa fa-download me-2"
-                                aria-hidden="true"
-                              ></i>
-                              download
-                            </a>
-                          </div>
-                          <div class="col-sm-12  col-md-6 col-lg-6 mb-2">
-                            <form class="btn btn-primary d-flex justify-content-around align-items-center">
-                              <label for="upload" class="mb-0">
-                                <i
-                                  class="fa fa-upload me-2"
-                                  aria-hidden="true"
-                                ></i>
-                                upload
-                              </label>
-                              <input
-                                type="file"
-                                class="form-control-file"
+                                className="form-control-file"
                                 hidden
                                 id="upload"
                               />

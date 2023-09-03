@@ -52,7 +52,13 @@ export function Dashboard() {
                     </div>
                   </div>
                   <div className="w-full">
-                    <Table title={"Users Belong To Community"} data={users} columns={columns}/>
+                    {users && (
+                      <Table
+                        title={"Users Belong To Community"}
+                        data={users}
+                        columns={columns}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

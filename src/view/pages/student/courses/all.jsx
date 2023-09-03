@@ -28,7 +28,7 @@ const Courses = () => {
             {course.professor}
           </p>
           <button
-            className="p-2 rounded-xl w-24 opacity-75 "
+            className="rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-slate-50 py-2 px-3"
             style={{ backgroundColor: "#800060" }}
           >
             <Link

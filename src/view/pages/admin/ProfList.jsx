@@ -27,7 +27,14 @@ const ProfList = () => {
   return (
     <LayoutResolver>
       <div className="m-10">
-        <Table data={professors} title={"List of all professors"} columns={columns}/>
+        {users &&
+        (
+          <Table
+            data={professors}
+            title={"List of all professors"}
+            columns={columns}
+          />
+        )}
       </div>
     </LayoutResolver>
   );

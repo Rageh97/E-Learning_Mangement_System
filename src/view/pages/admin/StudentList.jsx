@@ -11,6 +11,7 @@ const StudentList = () => {
     {
       name: "Name",
       selector: (row) => row.name,
+      
     },
     {
       name: "Email",
@@ -24,11 +25,21 @@ const StudentList = () => {
       name: "Code",
       selector: (row) => row.code,
     },
+    {
+      name: "Operations",
+      selector: (row) => row.code,
+    },
   ];
   return (
     <LayoutResolver>
       <div className="m-10">
-        <Table title={"List of all students"} data={students} columns={columns}/>
+        {users  && (
+          <Table
+            title={"List of all students"}
+            data={students}
+            columns={columns}
+          />
+        )}
       </div>
     </LayoutResolver>
   );

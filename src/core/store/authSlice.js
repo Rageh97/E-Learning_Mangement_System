@@ -10,7 +10,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state, action) => {
       state.is_authintcated = false;
-      localStorage.clear();
+      localStorage.removeItem("user");
     },
     login: (state, action) => {
       state.is_authintcated = true;
