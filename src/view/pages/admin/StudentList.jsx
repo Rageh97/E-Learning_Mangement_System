@@ -11,6 +11,7 @@ const StudentList = () => {
     {
       name: "Name",
       selector: (row) => row.name,
+      sortable:"true",
       
     },
     {
@@ -25,10 +26,7 @@ const StudentList = () => {
       name: "Code",
       selector: (row) => row.code,
     },
-    {
-      name: "Operations",
-      selector: (row) => row.code,
-    },
+   
   ];
   return (
     <LayoutResolver>

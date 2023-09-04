@@ -11,6 +11,8 @@ const authSlice = createSlice({
     logout: (state, action) => {
       state.is_authintcated = false;
       localStorage.removeItem("user");
+      localStorage.removeItem("is_authintcated");
+      localStorage.removeItem("userinfo");
     },
     login: (state, action) => {
       state.is_authintcated = true;
