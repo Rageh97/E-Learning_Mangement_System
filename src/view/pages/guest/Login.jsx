@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "../../../style/login.css";
 import GuestLayout from "../../layouts/GuestLayout";
 import Footer from "../../components/common/Footer";
@@ -62,6 +61,18 @@ function Login() {
         <div className="px-4 py-5 px-md-5 text-center text-lg-start">
           <div className="container-fluid">
             <div className="row gx-lg-5 align-items-center">
+              <div className="bg-white rounded-md p-3 mb-3 flex flex-col">
+                <h1 className="text-xl text-red-600 fw-bold">Note :</h1>
+                <h3 className="text-blue-500 mb-1 text-lg">
+                  Login As Admin <span className="text-black">admin@gmail.com</span>
+                </h3>
+                <h3 className="text-blue-500 mb-1 text-lg">
+                  Login As Student <span className="text-black">student@gmail.com</span>
+                </h3>
+                <h3 className="text-blue-500 mb-1 text-lg">
+                  Login As Professor <span className="text-black">professor@gmail.com</span>
+                </h3>
+              </div>
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <h1
                   className="my-5 fw-bold"
